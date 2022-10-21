@@ -1,23 +1,22 @@
 const http = require("http");
 const { parse } = require("path/posix");
 const routes = require("./routes");
+const path = require("path");
 
 const express = require("express");
 
+const adminRoutes = require("./routes/admin.js");
+const shopRoutes = require("./routes/shop.js");
+
 const app = express();
 
-app.use("/", (req, res, next) => {
-  res.send("<h1>Klk Main pagee</h1>");
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/admin", adminRoutes);
+app.use(shopRoutes);
 
-  console.log("Always runs");
-  next();
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
 });
-
-app.use("/add-product", (req, res, next) => {
-  console.log("In other middleware");
-  res.send("<h1>Klk prodicts</h1>");
-});
-
 // const server = http.createServer(routes);
 // const server = http.createServer(app);
 
