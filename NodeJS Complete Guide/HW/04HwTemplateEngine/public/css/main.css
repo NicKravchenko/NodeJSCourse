@@ -1,0 +1,13 @@
+.uglyColor {
+  background-color: tomato;
+}
+
+.header-element {
+  display: inline;
+  margin-right: 5px;
+  background-color: aqua;
+}
+
+.active{
+  background-color: brown;
+}
