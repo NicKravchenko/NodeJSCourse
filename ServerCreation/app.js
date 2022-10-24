@@ -3,13 +3,16 @@
 // const routes = require("./routes");
 const path = require("path");
 const express = require("express");
+const expressHbs = require("express-handlebars");
 
 const adminData = require("./routes/admin.js");
 const shopRoutes = require("./routes/shop.js");
 
 const app = express();
 
+app.engine("handlebars", expressHbs);
 app.set("view engine", "pug");
+// app.set("view engine", "handlebars");
 app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
