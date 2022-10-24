@@ -1,5 +1,8 @@
 <%- include ("partials/header") %> 
 
     <h1 class="uglyColor">List of cars:</h1>
+    <% cars.forEach( carName => {%> 
+        <p><%= carName %> </p>
+      <% }) %> 
   </body>
 </html>

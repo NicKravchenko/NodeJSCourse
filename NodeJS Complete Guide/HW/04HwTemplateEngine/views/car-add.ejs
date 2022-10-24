@@ -1,5 +1,10 @@
 <%- include('partials/header') %> 
 
     <h1>Add new Car:</h1>
+    <form action="/admin/addCar/" method="POST">
+      <label for="carName">Car name</label>
+      <input type="text" name="carName" id="carName">
+      <input type="submit" value="submit">
+    </form>
   </body>
 </html>
