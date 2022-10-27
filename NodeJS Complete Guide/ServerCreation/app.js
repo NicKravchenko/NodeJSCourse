@@ -1,30 +1,24 @@
-// const http = require("http");
-// const { parse } = require("path/posix");
-// const routes = require("./routes");
-const path = require("path");
-const express = require("express");
-const expressHbs = require("express-handlebars");
+const path = require('path');
 
-const adminData = require("./routes/admin.js");
-const shopRoutes = require("./routes/shop.js");
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const errorController = require('./controllers/error');
 
 const app = express();
 
-app.engine("handlebars", expressHbs);
-app.set("view engine", "pug");
-// app.set("view engine", "handlebars");
-app.set("views", "views");
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-app.use(express.static(path.join(__dirname, "public")));
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-app.use("/admin", adminData.routes);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
-app.use((req, res, next) => {
-  // res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
-  res.status(404).render("404", { pageTitle: "Page Not Found" });
-});
-// const server = http.createServer(routes);
-// const server = http.createServer(app);
+app.use(errorController.get404);
 
 app.listen(3000);
